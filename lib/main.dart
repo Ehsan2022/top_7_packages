@@ -1,12 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:tob_seven/classes.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: TopSeven(),
+    home: MyApp(),
   ));
 }
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: AnimatedSplashScreen(
+          animationDuration: Duration(seconds: 2),
+          backgroundColor: Colors.black,
+          splash: Center(
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.purple, Colors.blue],
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    stops: [0.5, 0]),
+              ),
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.menu_book,
+                    size: 60,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    'version : 0.0.1',
+                    style:
+                    TextStyle(fontFamily: 'pacifico', color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          duration: 4000,
+          nextScreen: TopSeven(),
+          splashTransition: SplashTransition.fadeTransition,
+        ));
+  }
+}
+
 
 class TopSeven extends StatefulWidget {
   const TopSeven({Key? key}) : super(key: key);
